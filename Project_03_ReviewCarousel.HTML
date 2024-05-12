@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Carousel</title>
+    <style>
+        body{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(225, 225, 252);
+        }
+        .underline{
+            width: 93px;
+            height: 4px;
+            background-color: rgb(7, 166, 240);
+            position: relative;
+            top: -38px;
+            left: 103px;
+        }
+        .heading > h1{
+            font-size: 50px;
+        }
+        .review{
+            height: auto;
+            width: 580px;
+            /* height: 417px; */
+            background-color: #fff;  
+            /* display: flex;
+            flex-wrap: wrap;
+            justify-content: center; */
+            align-items: center;
+            margin: auto;
+            margin:15px;
+            box-shadow: 0 0 20px rgb(7, 166, 240);
+            border-radius: 15px;
+            padding: 10px;
+        }
+        .imageback > img{
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            position: relative;
+            z-index: 1;
+            left: -8px;
+            top: 6px;
+            /* background-image: url(./images/Person1.jpg); */
+            background-size: cover; 
+            background-position: center center;
+        }
+        .image{
+            width: 130px;
+            height: 130px;
+            margin: 30px 30px 20px 30px;
+            border-radius: 50%;
+            background-color: rgb(7, 166, 240);
+        }
+        .heading{
+            display: grid;
+            justify-content: center;
+            align-items: center;
+        }
+        .name,.designation{
+            text-transform: capitalize;
+            font-size: 30px;
+            display: grid;
+            justify-content: center;
+            align-items: center;
+        }
+        .designation{
+            font-size: 20px;
+            margin: 10px 0px;
+            color: rgb(7, 166, 240);
+        }
+        .reviews{
+            /* width: 500px; */
+            text-align: justify;
+            margin: 0 20px 20px 20px;
+            padding: 0 20px 0 20px;
+            color: rgb(46, 111, 141);
+        }
+        #previous{
+            font-size: 25px;
+            background: transparent;
+            border: none;
+            margin: 5px;
+            color: rgb(7, 166, 240);
+            cursor: pointer;
+        }
+        #next{
+            font-size: 25px;
+            background: transparent;
+            border: none;
+            margin: 5px;
+            color: rgb(7, 166, 240);
+            cursor: pointer;
+        }
+        #box{
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            border-color: rgb(7, 166, 240);
+            /* background-color: rgb(7, 166, 240); */
+            margin: 3px 3px 10px 3px;
+        }
+      .slider-content{
+        display: none;
+        padding: 10px;
+        
+      }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="heading">
+            <h1>Our Review</h1>
+            <div class="underline"></div>
+        </div>
+
+        <div class="review container">
+            <div class="slider-content">
+                <div style="display: grid;align-items: center;justify-content: center;">
+                    <div class="image">
+                        <div class="imageback">
+                            <img src="./images/Ironman.PNG" alt="image">
+                        </div>
+                    </div>
+                </div>
+                    <div class="name">Robert Downey jr</div>
+                    <div class="designation">businessman and engineer</div>
+                    <div class="reviews">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facere praesentium 
+                        accusantium quidem magnam reiciendis, tempora laborum recusandae aperiam corporis unde.</div>    
+            </div>
+
+            <div class="slider-content">
+                <div style="display: grid;align-items: center;justify-content: center;">
+                    <div class="image">
+                        <div class="imageback">
+                            <img src="./images/Spiderman.PNG" alt="image">
+                        </div>
+                    </div>
+                </div>
+                    <div class="name">Peter Benjamin Parker</div>
+                    <div class="designation">freelance photographer</div>
+                    <div class="reviews">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sed dolores in tempore veniam quis perferendis hic, numquam itaque facere. Omnis culpa optio vel aut sapiente obcaecati doloremque iste labore tempora laborum!</div>    
+            </div>
+
+            <div class="slider-content">
+                <div style="display: grid;align-items: center;justify-content: center;">
+                    <div class="image">
+                        <div class="imageback">
+                            <img src="./images/Captainamerica.PNG" alt="image">
+                        </div>
+                    </div>
+                </div>
+                    <div class="name">Steve Rogers</div>
+                    <div class="designation">super soldier</div>
+                    <div class="reviews">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorem dolore   laboriosam a quam facilis tempora quibusdam deserunt sequi voluptatibus consectetur eligendi odit fuga nobis impedit, placeat optio provident necessitatibus aspernatur ipsum architecto perferendis animi suscipit. Ab, facilis. Facere, adipisci sint?</div>    
+            </div>
+            <div style="display: grid;align-items: center;justify-content: center;">
+                <div style="display: inline-block;">
+                    <button id="previous" onclick="previousReview()"><</button>
+                    <button id="next" onclick="nextReview()">></button>
+                </div>
+                <div class="box">
+                <button type="button" id="box"></button>
+                <button type="button" id="box"></button>
+                <button type="button" id="box"></button>
+                </div>
+            </div>
+        </div>    
+    </div>
+
+    <script>
+let rev = 0;
+let boxes = 0;
+carousel(rev);
+carouselbox(boxes);
+
+function previousReview() {
+	rev = rev - 1;
+    boxes = boxes - 1;
+	carousel(rev);
+    carouselbox(boxes);
+}
+
+function nextReview() {
+	rev = rev + 1;
+    boxes = boxes + 1;
+	carousel(rev);
+    carouselbox(boxes);
+}
+
+function carousel(review) {
+	let reviews = document.getElementsByClassName("slider-content");
+
+	if (review >= reviews.length) {
+		review = 0;
+		rev = 0;
+	}
+	if (review < 0) {
+		review = reviews.length - 1;
+		rev = reviews.length - 1;
+	}
+	for (let i = 0; i < reviews.length; i++) {
+		reviews[i].style.display = "none";
+	}
+	reviews[review].style.display = "block";
+
+}
+
+function carouselbox(colorbox) {
+	let boxs = document.getElementsByClassName("box");
+
+	if (colorbox >= boxs.length) {
+		colorbox = 0;
+		boxes = 0;
+	}
+	if (box < 0) {
+		colorbox = boxs.length - 1;
+		boxes = boxs.length - 1;
+	}
+	for (let i = 0; i < boxs.length; i++) {
+		boxs[i].style.backgroundcolor = "rgb(7, 166, 240)";
+	}
+	boxs[colorbox].style.backgroundcolor = "white";
+
+}
+
+    </script>
+</body>
+</html>

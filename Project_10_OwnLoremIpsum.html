@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Own Lorem Ipsum</title>
+    <style>
+        .container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(169, 224, 250);
+            width: 99vw;
+            height: 96vh;
+        }
+        .content{
+            width: 50%;
+            height:50%;
+            background-color: #fff;
+            box-shadow: 0 0 3vw rgb(7, 166, 240);
+            border-radius: 1.5vw; 
+            border: none;
+            padding: 2%;
+            font-size: 20px;
+            /* text-align: justify; */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content" contenteditable="true" id="content">
+            
+        </div>
+    </div>
+    <script>
+        var inputtext = document.getElementById("content");
+        document.addEventListener('keydown', function(event) {
+            if (event.code == 'Enter') {
+                if((document.getElementById("content").innerHTML).substring(5, (document.getElementById("content").innerHTML).length)==NaN){
+                    
+                }
+            //     var x = document.getElementById("content").innerHTML;
+            // console.log(parseInt(x.substring(5,x.length)));
+            var x = parseInt((document.getElementById("content").innerHTML).substring(5, (document.getElementById("content").innerHTML).length));
+            var myloremipsum = genString(x);
+            document.getElementById("content").innerHTML = "";
+            document.getElementById("content").innerHTML = myloremipsum;
+            }
+        });
+        
+        function genString(length){
+            const char = "abcdefghijklmnopqrstuvwxy z"
+            const space = 5;
+            let string = "";
+            for(i = 0; i < length; i++){
+                string += char.charAt(Math.floor(Math.random() * char.length));
+            }
+            return string;
+            
+        }
+    </script>
+</body>
+</html>

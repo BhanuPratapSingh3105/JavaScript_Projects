@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature converter</title>
+</head>
+<style>
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: aqua;
+    width: 99vw;
+    height: 96vh;
+}
+.converter{
+    width: 60vw;
+    height:fit-content ;
+    background-color: #fff;
+}
+.converter > h1{
+    margin: 2.7vw;
+    font-size: 4vw;
+}
+.select > p{
+    margin: 1vw 1vw 0vw 3vw;
+    font-size: 2vw;
+}
+#unitConverter,output{
+    width: 20vw;
+    margin: 1vw 1vw 2vw 3vw;
+    font-size: 1.5vw;
+}
+.input{
+    margin: 2vw;
+    display: none;
+}
+#input,#output{
+    width: 20vw;
+    margin: 1vw 1vw 2vw 0vw;
+    font-size: 1.5vw;
+}
+#inputlabel,#outputlabel{
+    font-size: 1vw;
+}
+
+</style>
+<body>
+    <div class="container">
+        <div class="converter">
+            <h1>Temperature Converter</h1>
+            <div class="select">
+                <p>Please select the converter:
+                <select id="unitConverter" onchange="passSelectedValue()">
+                    <option value="">Select Converter</option>
+                    <option value="celtofeh" id="celtofeh">Celsius-Fahrenheit</option>
+                    <option value="fehtocel" id="fehtocel">Fahrenheit-Celsius</option>
+                    <option value="celtokel" id="celtokel">Celsius-Kelvin</option>
+                    <option value="keltocel" id="keltocel">Kelvin-Celsius</option>
+                    <option value="fehtokel" id="fehtokel">Fahrenheit-Kelvin</option>
+                    <option value="keltofeh" id="keltofeh">Kelvin-Fahrenheit</option>
+                </select></p>
+            </div>
+            <div class="input" id="inputdiv">
+                <strong><label id="inputlabel"></label></strong>
+                <input type="number" id="input" oninput="tempconverter(this.value)" onchange="tempconverter(this.value)">
+                <strong><label id="outputlabel"></label></strong>
+                <input id="output">
+            </div>
+        </div>
+    </div>
+    <script>
+        var typeconverter = document.getElementById("unitConverter").value; 
+        var passSelectedValue = () => { 
+            if(document.getElementById("unitConverter").value === "celtofeh"){
+            document.getElementById("input").value="";
+            document.getElementById("output").value="";
+            document.getElementById("inputdiv").style.display = "block";
+            document.getElementById("inputlabel").innerHTML = "Celsius:";
+            document.getElementById("outputlabel").innerHTML = "Fahrenheit:";
+            document.getElementById("input").setAttribute("placeholder","Enter Temperature in Celsius");
+            document.getElementById("output").setAttribute("placeholder","Output Temperature in Fahrenheit");
+            }
+
+            if(document.getElementById("unitConverter").value === "fehtocel"){
+            document.getElementById("input").value="";
+            document.getElementById("output").value="";    
+            document.getElementById("inputdiv").style.display = "block";
+            document.getElementById("inputlabel").innerHTML = "Fahrenheit:";
+            document.getElementById("outputlabel").innerHTML = "Celsius:";
+            document.getElementById("input").setAttribute("placeholder","Enter Temperature in Fahrenheit");
+            document.getElementById("output").setAttribute("placeholder","Output Temperature in Celsius");
+            }
+
+            if(document.getElementById("unitConverter").value === "celtokel"){
+            document.getElementById("input").value="";
+            document.getElementById("output").value="";
+            document.getElementById("inputdiv").style.display = "block";
+            document.getElementById("inputlabel").innerHTML = "Celsius:";
+            document.getElementById("outputlabel").innerHTML = "Kelvin:";
+            document.getElementById("input").setAttribute("placeholder","Enter Temperature in Celsius");
+            document.getElementById("output").setAttribute("placeholder","Output Temperature in Kelvin");
+            }
+        
+            if(document.getElementById("unitConverter").value === "keltocel"){
+            document.getElementById("input").value="";
+            document.getElementById("output").value="";        
+            document.getElementById("inputdiv").style.display = "block";
+            document.getElementById("inputlabel").innerHTML = "Kelvin:";
+            document.getElementById("outputlabel").innerHTML = "Celsius:";
+            document.getElementById("input").setAttribute("placeholder","Enter Temperature in Kelvin");
+            document.getElementById("output").setAttribute("placeholder","Output Temperature in Celsius");
+            }
+            
+            if(document.getElementById("unitConverter").value === "fehtokel"){
+            document.getElementById("input").value="";
+            document.getElementById("output").value="";
+            document.getElementById("inputdiv").style.display = "block";
+            document.getElementById("inputlabel").innerHTML = "Fahrenheit:";
+            document.getElementById("outputlabel").innerHTML = "Kelvin:";
+            document.getElementById("input").setAttribute("placeholder","Enter Temperature in Fahrenheit");
+            document.getElementById("output").setAttribute("placeholder","Output Temperature in Kelvin");
+            }
+
+            if(document.getElementById("unitConverter").value === "keltofeh"){
+            document.getElementById("input").value="";
+            document.getElementById("output").value="";
+            document.getElementById("inputdiv").style.display = "block";
+            document.getElementById("inputlabel").innerHTML = "Kelvin:";
+            document.getElementById("outputlabel").innerHTML = "Fahrenheit:";
+            document.getElementById("input").setAttribute("placeholder","Enter Temperature in Kelvin");
+            document.getElementById("output").setAttribute("placeholder","Output Temperature in Fahrenheit");
+            }
+            
+        }
+       function tempconverter(tempvalue){
+        let temperature = tempvalue;
+        if(document.getElementById("unitConverter").value === "celtofeh")
+        document.getElementById("output").value = +((temperature * 9/5) + 32) + "F";
+        if(document.getElementById("unitConverter").value === "fehtocel")
+        document.getElementById("output").value = +((temperature - 32) * 5/9) + "C";
+        if(document.getElementById("unitConverter").value === "celtokel")
+        document.getElementById("output").value = +(temperature + 273.15) + "K";
+        if(document.getElementById("unitConverter").value === "keltocel")
+        document.getElementById("output").value = +(temperature - 273.15) + "C";
+        if(document.getElementById("unitConverter").value === "fehtokel")
+        document.getElementById("output").value = +((temperature - 273.15) * 9/5 + 32) + "K";
+        if(document.getElementById("unitConverter").value === "keltofeh")
+        document.getElementById("output").value = +((temperature - 32) * 5/9 + 273.15) + "F";
+       }
+    </script>
+</body>
+</html>

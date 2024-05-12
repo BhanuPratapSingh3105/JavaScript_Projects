@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+</head>
+<style>
+    .container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(10, 168, 241);
+        width: 100%;
+        height: 97vh;
+    }
+    .calculator{
+        height: fit-content;
+        width: 359px;
+        background-color: #000;
+        border: 10px solid #000;
+        border-radius: 15px;
+    }
+    .outputscreen{
+        width: 100%;
+        height: 100px;
+        background-color: #fff;
+        overflow: hidden;
+        border-radius: 8px;
+        border-bottom: 5px solid #000;
+    }
+    .button{
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        align-items: center;
+        flex-flow: wrap ;
+    }
+    .button1{
+        width: 89.7px;
+        padding: 10px;
+        font-size: 25px;
+    }
+    .calculatorname{
+        color: #fff;
+        font-size: 28px;
+        margin: 1px 2px 2px 15px;
+    }
+    @media(min-width:395px){
+       .button1{
+         width: 89.5px;
+        padding: 10px;
+        font-size: 25px;
+       }
+    }
+    @media(max-width:395px){
+       .button1{
+         width: 83.5px;
+        padding: 10px;
+        font-size: 25px;
+       }
+    }
+    .operand1,.operand2{
+        width: 100%;
+        height: 50%;
+        border:none;
+        text-align: end;
+        color: #000;
+    }
+    .operand2{
+        display: flex;
+        justify-content: right;
+        align-items: end;
+        font-size: 48px;
+        /* border-radius: 8px 8px 0px 0px; */
+    }
+    .operand1{
+        display: flex;
+        justify-content: right;
+        align-items: end;
+        font-size: 32px;
+        /* border-radius: 0px 0px 8px 8px; */
+    }
+    
+</style>
+<body>
+    <div class="container">
+        <div class="calculator">
+            <div class="calculatorname">CASIO</div>
+            <div class="outputscreen">
+                <div class="operand1" id="expression"></div>
+                <div class="operand2" id="result"></div>
+            </div>
+            <div class="button">
+                <button type="button" class="button1 operator" id="rem">%</button>
+                <button type="button" class="button1" id="clear">CE</button>
+                <button type="button" class="button1" id="cancel">C</button>
+                <button type="button" class="button1" id="secclear"><strong>X</strong></button>
+                <button type="button" class="button1" id="fraction">1/x</button>
+                <button type="button" class="button1" id="square">x<sup>2</sup></button>
+                <button type="button" class="button1" id="underroot">x<sup>1/2</sup></button>
+                <button type="button" class="button1 operator" id="divide">/</button>
+                <button type="button" class="button1 number" id="seven">7</button>
+                <button type="button" class="button1 number" id="eight">8</button>
+                <button type="button" class="button1 number" id="nine">9</button>
+                <button type="button" class="button1 operator" id="multiply">*</button>
+                <button type="button" class="button1 number" id="four">4</button>
+                <button type="button" class="button1 number" id="five">5</button>
+                <button type="button" class="button1 number" id="six">6</button>
+                <button type="button" class="button1 operator" id="substract">-</button>
+                <button type="button" class="button1 number" id="one">1</button>
+                <button type="button" class="button1 number" id="two">2</button>
+                <button type="button" class="button1 number" id="three">3</button>
+                <button type="button" class="button1 operator" id="add">+</button>
+                <button type="button" class="button1" id="plusminus">+/-</button>
+                <button type="button" class="button1 number" id="zero">0</button>
+                <button type="button" class="button1" id="dot">.</button>
+                <button type="button" class="button1" id="equal">=</button>
+            </div>
+        </div>
+    </div>
+    <script>
+            var display1 = document.getElementById("expression")
+            var display2 = document.getElementById("result")
+            const num = document.querySelectorAll('.number');
+            num.forEach(num=>{
+                num.addEventListener('click', () =>{
+                    display2.textContent += num.textContent;
+                });
+            });
+            document.querySelector('#dot').addEventListener('click', () =>{
+                display2.textContent += '.'
+            });
+            const operator = document.querySelectorAll('.operator');
+            operator.forEach(operator =>{
+                operator.addEventListener('click', () => {
+                display2.textContent += operator.textContent;
+                display1.textContent += display2.textContent
+                display2.textContent ="";
+            });
+        });
+        document.querySelector('#equal').addEventListener('click' , () =>{
+            try{
+                display1.textContent += display2.textContent;
+                let x = display1.textContent;
+                let y = eval(x);
+                console.log(y);
+                display2.textContent = y;
+                }
+            catch{
+                display2.textContent = Error;
+            }
+        });
+        document.querySelector('#clear').addEventListener('click', () =>{
+            display2.textContent ="";
+        });
+        document.querySelector('#cancel').addEventListener('click', () =>{
+            display1.textContent ="";
+            display2.textContent ="";
+        });
+        document.querySelector('#secclear').addEventListener('click', () =>{
+            display2.textContent = display2.textContent.substring(0 , display2.textContent.length-1);
+        });
+        document.querySelector('#plusminus').addEventListener('click', () =>{
+            display2.textContent = -display2.textContent;
+        });
+        document.querySelector('#fraction').addEventListener('click', () =>{
+            display1.textContent += 1 + '/' + display2.textContent;
+            display2.textContent = 1/display2.textContent;
+        });
+        document.querySelector('#square').addEventListener('click', () =>{
+            display1.textContent = display2.textContent + '^'+ display2.textContent;
+            display2.textContent = Math.pow(display2.textContent,2);
+        });
+        document.querySelector('#underroot').addEventListener('click', () =>{
+            display1.textContent = display2.textContent + '^'+ 1 + '/' + display2.textContent;
+            display2.textContent = Math.pow(display2.textContent,1/2);
+        });
+    </script>
+</body>
+</html>
